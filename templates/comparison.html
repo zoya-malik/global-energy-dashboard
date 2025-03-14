@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Compare Energy Consumption{% endblock %}
+
+{% block content %}
+  <h1>Compare Energy Consumption</h1>
+
+  <form method="GET" class="row g-3">
+    <div class="col-md-5">
+      <label for="country1" class="form-label">Select First Country:</label>
+      <select name="country1" id="country1" class="form-select">
+        {% for country in all_countries %}
+          <option value="{{ country }}" {% if country == request.args.get('country1') %}selected{% endif %}>
+            {{ country }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-5">
+      <label for="country2" class="form-label">Select Second Country:</label>
+      <select name="country2" id="country2" class="form-select">
+        {% for country in all_countries %}
+          <option value="{{ country }}" {% if country == request.args.get('country2') %}selected{% endif %}>
+            {{ country }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-2 align-self-end">
+      <button type="submit" class="btn btn-primary w-100">Compare</button>
+    </div>
+  </form>
+
+  <div class="mt-4">
+    {% if comparison_html %}
+      {{ comparison_html | safe }}
+    {% else %}
+      <p class="text-muted">No comparison data available. Select two countries above.</p>
+    {% endif %}
+  </div>
+
+  <a href="/" class="btn btn-outline-primary mt-3">🏠 Go Back</a>
+{% endblock %}
+

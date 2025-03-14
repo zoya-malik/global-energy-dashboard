@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}World Map - Energy Consumption{% endblock %}
+
+{% block content %}
+  <h1>Global Energy Consumption Map</h1>
+  <div class="mt-4">
+    {{ world_map_html | safe }}
+  </div>
+  <a href="/" class="btn btn-outline-primary mt-3">🏠 Go Back</a>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Energy Forecast{% endblock %}
+
+{% block content %}
+  <h1>Energy Consumption Forecast</h1>
+
+  <form method="GET" class="row g-3">
+    <div class="col-md-6">
+      <label for="country" class="form-label">Select Country:</label>
+      <select name="country" id="country" class="form-select">
+        {% for c in all_countries %}
+          <option value="{{ c }}" {% if c == request.args.get('country') %}selected{% endif %}>
+            {{ c }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-6 align-self-end">
+      <button type="submit" class="btn btn-primary w-100">Forecast</button>
+    </div>
+  </form>
+
+  <div class="mt-4">
+    {% if forecast_html %}
+      {{ forecast_html | safe }}
+    {% else %}
+      <p class="text-muted">Select a country to view the forecast.</p>
+    {% endif %}
+  </div>
+
+  <a href="/" class="btn btn-outline-primary mt-3">🏠 Go Back</a>
+{% endblock %}
+
